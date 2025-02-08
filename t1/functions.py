@@ -1,5 +1,5 @@
 from math import sqrt
-
+import numpy as np
 def prod_non_zero_diag(x):
     res = 1
     for i in range(min(len(x), len(x[0]))):
@@ -38,8 +38,10 @@ def are_multisets_equal(x, y):
 
 def max_after_zero(x):
     res = 0
-    for i in x:
-        res = max(res, i)
+    for i in range(1, len(x)):
+        if(x[i-1] == 0):
+            res = max(res, x[i])
+    return res
     """Find max element after zero in array.
 
     input:
@@ -64,14 +66,15 @@ def convert_image(img, coefs):
 
     Not vectorized implementation.
     """
-    res = [([0] * len(img))] * len(img[0])
+    res = [[0] * len(img[0]) for _ in range(len(img))]
   
     for hi in range(len(img)):
 
         for wi in range(len(img[0])):
-            res[hi][wi] = img[hi][wi][0] * coefs[0] +img[hi][wi][1]  * coefs[1] + img[hi][wi][2]  + coefs[2]   
+            res[hi][wi] = img[hi][wi][0] * coefs[0] +img[hi][wi][1]  * coefs[1] + img[hi][wi][2] * coefs[2]   
             
-    pass
+    return res
+
 
 
 def run_length_encoding(x):

@@ -23,7 +23,7 @@ def are_multisets_equal(x, y):
     True if multisets are equal, False otherwise -- boolean
     """
 
-    return (np.sort(x), np.sort(y))
+    return (np.sort(x) == np.sort(y))
 
 def max_after_zero(x):
     """
@@ -35,9 +35,10 @@ def max_after_zero(x):
     maximum element after zero -- integer number
     """
     zero_indices = np.where(x == 0)[0]
+    zero_indices = zero_indices[zero_indices != len(x)-1]
     if zero_indices.size == 0:
         return None
-    return np.max(x[zero_indices])
+    return np.max(x[zero_indices+1])
 
 def convert_image(img, coefs):
     """
